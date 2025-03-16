@@ -1,20 +1,12 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    networks:
-      - mern-network
-
   hello-service:
     build: ./backend/helloService
     ports:
       - "5001:5001"
-    depends_on:
-      - mongodb
+    environment:
+      - MONGO_URI=${MONGO_URI}
     networks:
       - mern-network
 
@@ -22,8 +14,8 @@ services:
     build: ./backend/profileService
     ports:
       - "5002:5002"
-    depends_on:
-      - mongodb
+    environment:
+      - MONGO_URI=${MONGO_URI}
     networks:
       - mern-network
 
@@ -37,7 +29,6 @@ services:
     networks:
       - mern-network
 
-# 🔥 Define the network here
 networks:
   mern-network:
     driver: bridge
