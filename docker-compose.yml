@@ -4,18 +4,18 @@ services:
   hello-service:
     build: ./backend/helloService
     ports:
-      - "5001:5001"
-    environment:
-      - MONGO_URI=${MONGO_URI}
+      - "3001:3001"
+    env_file:
+      - ./backend/helloService/.env
     networks:
       - mern-network
 
   profile-service:
     build: ./backend/profileService
     ports:
-      - "5002:5002"
-    environment:
-      - MONGO_URI=${MONGO_URI}
+      - "3002:3002"
+    env_file:
+      - ./backend/profileService/.env
     networks:
       - mern-network
 
